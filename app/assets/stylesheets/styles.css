@@ -1,0 +1,21 @@
+.nav li a {
+position: relative;
+display: block;
+padding: 10px 10px;
+}
+.navbar-form {
+  margin-left: 25px;
+}
+.navbar-nav li a {
+  line-height: 33px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+body {
+  padding-top:80px;
+  padding-bottom:50px;
+}
+footer {
+  text-align: center;
+}

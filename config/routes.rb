@@ -1,5 +1,6 @@
 Site101::Application.routes.draw do
-  root to: 'wiki#index'
+  root to: 'main#index'
   devise_for :admins
-  resources :wiki
+  resources :main, only: [:index, :show]
+  resources :wikis
 end
