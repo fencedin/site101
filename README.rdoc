@@ -1,0 +1,10 @@
+= Personal Site
+
+== To be deployed when finished
+
+=== Will be the home to my personal info and blog
+
+* bio page
+* blog with posts/comments
+* project page
+* in browser terminal for fun things
