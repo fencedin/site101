@@ -1,0 +1,10 @@
+<div class="well">
+  <h1>Edit Post</h1>
+  <%= render 'layouts/errors', object: @wiki %><br>
+  <%= form_for @wiki do |f| %>
+    <%= f.text_field :title, placeholder: "Title of Post", class: "form-control" %><br>
+    <%= f.text_area :body, placeholder: "Body of Post", class: "form-control", rows: "10" %><br>
+    <%= f.hidden_field :hidden, value: true%>
+    <%= f.submit class: "btn btm-primary" %>
+  <% end %>
+</div>

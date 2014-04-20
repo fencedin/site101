@@ -3,13 +3,17 @@ position: relative;
 display: block;
 padding: 10px 10px;
 }
-.navbar-form {
-  margin-left: 25px;
+.search {
+  margin-right: 50px;
 }
 .navbar-nav li a {
   line-height: 33px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.well {
+  padding-top: 0px;
 }
 
 body {
@@ -18,4 +22,10 @@ body {
 }
 footer {
   text-align: center;
+}
+.hidden_form {
+  display: none;
+}
+a #admin .navbar-brand {
+  color: #ff0000 !important;
 }

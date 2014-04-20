@@ -10,32 +10,17 @@
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
 
-
       <% if admin_signed_in? %>
-        <a class="navbar-brand" href="/">Admin Mode</a>
+        <a class="navbar-brand bg-danger" href="/">Admin Mode</a>
       <% else %>
         <a class="navbar-brand" href="/">Vincent Rotter</a>
       <% end %>
 
-
       <ul class="nav navbar-nav">
-        <% if admin_signed_in? %>
-          <li><a href="/">New Post</a></li>
-          <li><a href="/">New Comments</a></li>
-        <% else %>
-          <li><a href="/">Blog</a></li>
-          <li><a href="/">Current Projects</a></li>
-          <li><a href="/">Leave Feedback</a></li>
-        <% end %>
+        <li><%= link_to "Blog", wikis_path %></li>
+        <li><a href="/">Current Projects</a></li>
+        <li><a href="/">Leave Feedback</a></li>
       </ul>
-      <% if current_page?(root_path) %>
-        <form class="navbar-form navbar-right" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-      <% end %>
 
       <ul class="nav navbar-nav navbar-right">
         <% if admin_signed_in? %>
@@ -50,6 +35,17 @@
         <li><a class="icon" href="https://twitter.com/fenced1n"><img src="/images/twitter.png" alt="twitter@fenced1n"></a></li>
         <li><a class="icon" href="https://www.linkedin.com/in/vincentrotter"><img src="/images/linkedin.png" alt="linkedin:vincentrotter" width="30px" height="30px"></a></li>
       </ul>
+
+      <% if current_page?(wikis_path) %>
+        <div class="col-lg-2 search navbar-right">
+          <form class="navbar-form input-group" role="search">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Submit</button>
+            </span>
+          </form>
+        </div>
+      <% end %>
 
     </div>
   </nav>

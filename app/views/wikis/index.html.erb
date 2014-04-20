@@ -1,0 +1,67 @@
+<%= content_for(:title, "Blog | VincentRotter") %>
+
+<% if admin_signed_in? %>
+  <%= render 'form' %>
+<% end %>
+
+<% if admin_signed_in? %>
+  <% @wikis.order(created_at: :desc).each do |wiki| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well">
+          <h1><%= wiki.title %>
+            <%= link_to "Delete", wiki_path(wiki), method: "delete", confirm: 'Delete post?', class: "btn btn-danger pull-right" %>
+            <%= link_to "Edit", wiki_path(wiki), class: "btn btn-primary pull-right" %>
+
+            <% if wiki.hidden? %>
+              <%= form_for wiki do |f| %>
+                <%= f.hidden_field :hidden, value: false %>
+                <%= f.submit "Hidden", class: "btn btn-info pull-right" %>
+              <% end %>
+            <% else %>
+              <%= form_for wiki do |f| %>
+                <%= f.hidden_field :hidden, value: true %>
+                <%= f.submit "Visible", class: "btn pull-right" %>
+              <% end %>
+            <% end %>
+
+          </h1>
+          <%= simple_format(wiki.body) %>
+          <br>
+          <p>» Posted: <%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %>
+             &nbsp&nbsp » Tags: asjf asjkdgf aksjd </p>
+        </div>
+      </div>
+    <%# @wikis.comments.each do |comments| %>
+        <div class="col-md-11 col-md-offset-1">
+          <div class="panel panel-body"><h4>name of person posting</h4>
+            <p>jsdygfkjsdgfa lfuashl fadsgasfgas lgajs,gjsag sdfgdf gdfgsdf gdf gsdf gsdf gsdfg sdf gsdfg sdfg </p>
+          </div>
+        </div>
+      </div>
+    <%# end %>
+    <br><br>
+  <% end %>
+<% else %>
+  <% @visible_wikis.sort!{|a,b|b.created_at<=>a.created_at}.each do |wiki| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well">
+          <h1><%= wiki.title %></h1>
+          <%= simple_format(wiki.body) %>
+          <br>
+          <p>» Posted: <%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %>
+             &nbsp&nbsp » Tags: asjf asjkdgf aksjd </p>
+        </div>
+      </div>
+    <%# @wikis.comments.each do |comments| %>
+        <div class="col-md-11 col-md-offset-1">
+          <div class="panel panel-body"><h4>name of person posting</h4>
+            <p>jsdygfkjsdgfa lfuashl fadsgasfgas lgajs,gjsag sdfgdf gdfgsdf gdf gsdf gsdf gsdfg sdf gsdfg sdfg </p>
+          </div>
+        </div>
+      </div>
+    <%# end %>
+    <br><br>
+  <% end %>
+<% end %>
