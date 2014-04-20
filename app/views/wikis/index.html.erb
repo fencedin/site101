@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="well">
-          <h1><%= wiki.title %>
+          <h1><%= link_to "#{wiki.title}", wiki_path(wiki) %>
             <%= link_to "Delete", wiki_path(wiki), method: "delete", confirm: 'Delete post?', class: "btn btn-danger pull-right" %>
             <%= link_to "Edit", wiki_path(wiki), class: "btn btn-primary pull-right" %>
 
@@ -28,8 +28,7 @@
           </h1>
           <%= simple_format(wiki.body) %>
           <br>
-          <p>» Posted: <%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %>
-             &nbsp&nbsp » Tags: asjf asjkdgf aksjd </p>
+          <p>» Posted: <em><%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>asjf asjkdgf aksjd</em> </p>
         </div>
       </div>
     <%# @wikis.comments.each do |comments| %>
@@ -47,11 +46,10 @@
     <div class="row">
       <div class="col-md-12">
         <div class="well">
-          <h1><%= wiki.title %></h1>
+          <h1><%= link_to "#{wiki.title}", wiki_path(wiki) %></h1>
           <%= simple_format(wiki.body) %>
           <br>
-          <p>» Posted: <%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %>
-             &nbsp&nbsp » Tags: asjf asjkdgf aksjd </p>
+          <p>» Posted: <em><%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>asjf asjkdgf aksjd</em> </p>
         </div>
       </div>
     <%# @wikis.comments.each do |comments| %>

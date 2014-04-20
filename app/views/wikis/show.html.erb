@@ -1,10 +1,29 @@
-<div class="well">
-  <h1>Edit Post</h1>
-  <%= render 'layouts/errors', object: @wiki %><br>
-  <%= form_for @wiki do |f| %>
-    <%= f.text_field :title, placeholder: "Title of Post", class: "form-control" %><br>
-    <%= f.text_area :body, placeholder: "Body of Post", class: "form-control", rows: "10" %><br>
-    <%= f.hidden_field :hidden, value: true%>
-    <%= f.submit class: "btn btm-primary" %>
-  <% end %>
-</div>
+<% if admin_signed_in? %>
+  <div class="well">
+    <h1>Edit Post</h1>
+    <%= render 'layouts/errors', object: @wiki %><br>
+    <%= form_for @wiki do |f| %>
+      <%= f.text_field :title, placeholder: "Title of Post", class: "form-control" %><br>
+      <%= f.text_area :body, placeholder: "Body of Post", class: "form-control", rows: "10" %><br>
+      <%= f.hidden_field :hidden, value: true%>
+      <%= f.submit class: "btn btm-primary" %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        <h1><%= @wiki.title %></h1>
+        <%= simple_format(@wiki.body) %>
+        <br>
+        <p>» Posted: <em><%= time_ago_in_words(@wiki.created_at) %> ago on <%= @wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>asjf asjkdgf aksjd</em> </p>
+      </div>
+    </div>
+  <%# @wikis.comments.each do |comments| %>
+      <div class="col-md-11 col-md-offset-1">
+        <div class="panel panel-body"><h4>name of person posting</h4>
+          <p>jsdygfkjsdgfa lfuashl fadsgasfgas lgajs,gjsag sdfgdf gdfgsdf gdf gsdf gsdf gsdfg sdf gsdfg sdfg </p>
+        </div>
+      </div>
+    </div>
+<% end %>
