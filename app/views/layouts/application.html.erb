@@ -20,6 +20,9 @@
         <li><%= link_to "Blog", wikis_path %></li>
         <li><a href="/">Current Projects</a></li>
         <li><a href="/">Leave Feedback</a></li>
+        <% if admin_signed_in? %>
+          <li><%= link_to "Tags", tags_path %></li>
+        <% end %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

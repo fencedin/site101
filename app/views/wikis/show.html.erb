@@ -1,3 +1,5 @@
+<%= content_for(:title, "#{@wiki.title} | VincentRotter") %>
+
 <% if admin_signed_in? %>
   <div class="well">
     <h1>Edit Post</h1>
@@ -6,7 +8,8 @@
       <%= f.text_field :title, placeholder: "Title of Post", class: "form-control" %><br>
       <%= f.text_area :body, placeholder: "Body of Post", class: "form-control", rows: "10" %><br>
       <%= f.hidden_field :hidden, value: true%>
-      <%= f.submit class: "btn btm-primary" %>
+      <p><%= f.collection_check_boxes(:tag_ids, Tag.all.order(:name), :id, :name, :item_wrapper_class => 'inline') %></p><br>
+      <%= f.submit class: "btn btn-primary" %>
     <% end %>
   </div>
 <% else %>
@@ -16,14 +19,41 @@
         <h1><%= @wiki.title %></h1>
         <%= simple_format(@wiki.body) %>
         <br>
-        <p>» Posted: <em><%= time_ago_in_words(@wiki.created_at) %> ago on <%= @wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>asjf asjkdgf aksjd</em> </p>
+        <p>» Posted: <em><%= time_ago_in_words(@wiki.created_at) %> ago on <%= @wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>
+            <% if @wiki.tags.size == 0 %>
+              none
+            <% else %>
+              <% @wiki.tags.order(:name).each do |tag| %>
+                <i class="text-success"> <%= tag.name %></i>
+              <% end %>
+            <% end %>
+          </em> </p>
       </div>
     </div>
-  <%# @wikis.comments.each do |comments| %>
-      <div class="col-md-11 col-md-offset-1">
-        <div class="panel panel-body"><h4>name of person posting</h4>
-          <p>jsdygfkjsdgfa lfuashl fadsgasfgas lgajs,gjsag sdfgdf gdfgsdf gdf gsdf gsdf gsdfg sdf gsdfg sdfg </p>
+    <div class="col-md-11 col-md-offset-1">
+      <div class="panel panel-body">
+        <h3 class="new_post">Add a comment</h3>
+        <div class="hidden_form">
+          <%= render 'layouts/errors', object: @comment %><br>
+          <%= form_for [@wiki, @comment] do |f| %>
+            <%= f.text_field :name, placeholder: "Your Name", class: "form-control" %><br>
+            <%= f.text_field :url, placeholder: "Your: url or email or @twitter", class: "form-control" %><br>
+            <%= f.text_area :response, placeholder: "Comment goes here", class: "form-control", rows: "5" %><br>
+            <%= f.hidden_field :hidden, value: true%>
+            <%= f.submit "Post Comment", class: "btn btn-primary" %>
+          <% end %>
         </div>
       </div>
     </div>
+
+    <% @wiki.comments.order(:created_at).each do |comment| %>
+      <div class="col-md-11 col-md-offset-1">
+        <div class="panel panel-body"><h4><%= link_to "#{comment.name}", comment.url %></h4>
+            <p><%= comment.response %></p>
+            <p>» Posted: <em><%= time_ago_in_words(comment.created_at) %> ago on <%= comment.created_at.strftime('%B %d, %Y') %></em></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
+

@@ -10,8 +10,7 @@
       <div class="col-md-12">
         <div class="well">
           <h1><%= link_to "#{wiki.title}", wiki_path(wiki) %>
-            <%= link_to "Delete", wiki_path(wiki), method: "delete", confirm: 'Delete post?', class: "btn btn-danger pull-right" %>
-            <%= link_to "Edit", wiki_path(wiki), class: "btn btn-primary pull-right" %>
+            <%= link_to "Delete", wiki_path(wiki), method: "delete", data: {confirm: 'Delete post?'}, class: "btn btn-danger pull-right" %>
 
             <% if wiki.hidden? %>
               <%= form_for wiki do |f| %>
@@ -28,18 +27,26 @@
           </h1>
           <%= simple_format(wiki.body) %>
           <br>
-          <p>» Posted: <em><%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>asjf asjkdgf aksjd</em> </p>
+          <p>» Posted: <em><%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp »  Tags: <em>
+            <% if wiki.tags.size == 0 %>
+              none
+            <% else %>
+              <% wiki.tags.order(:name).each do |tag| %>
+                <i class="text-success"> <%= tag.name %></i>
+              <% end %>
+            <% end %>
+          </em> </p>
         </div>
       </div>
-    <%# @wikis.comments.each do |comments| %>
+      <% wiki.comments.each do |comment| %>
         <div class="col-md-11 col-md-offset-1">
-          <div class="panel panel-body"><h4>name of person posting</h4>
-            <p>jsdygfkjsdgfa lfuashl fadsgasfgas lgajs,gjsag sdfgdf gdfgsdf gdf gsdf gsdf gsdfg sdf gsdfg sdfg </p>
+          <div class="panel panel-body"><h4><%= link_to "#{comment.name}", comment.url %></h4>
+            <p><%= comment.response %></p>
+            <p>» Posted: <em><%= time_ago_in_words(comment.created_at) %> ago on <%= comment.created_at.strftime('%B %d, %Y') %></em></p>
           </div>
         </div>
-      </div>
-    <%# end %>
-    <br><br>
+      <% end %>
+    </div><br><br>
   <% end %>
 <% else %>
   <% @visible_wikis.sort!{|a,b|b.created_at<=>a.created_at}.each do |wiki| %>
@@ -49,17 +56,25 @@
           <h1><%= link_to "#{wiki.title}", wiki_path(wiki) %></h1>
           <%= simple_format(wiki.body) %>
           <br>
-          <p>» Posted: <em><%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>asjf asjkdgf aksjd</em> </p>
+          <p>» Posted: <em><%= time_ago_in_words(wiki.created_at) %> ago on <%= wiki.created_at.strftime('%B %d, %Y') %></em>&nbsp&nbsp » Tags: <em>
+            <% if wiki.tags.size == 0 %>
+              none
+            <% else %>
+              <% wiki.tags.order(:name).each do |tag| %>
+                <i class="text-success"> <%= tag.name %></i>
+              <% end %>
+            <% end %>
+          </em> </p>
         </div>
       </div>
-    <%# @wikis.comments.each do |comments| %>
+      <% wiki.comments.each do |comment| %>
         <div class="col-md-11 col-md-offset-1">
-          <div class="panel panel-body"><h4>name of person posting</h4>
-            <p>jsdygfkjsdgfa lfuashl fadsgasfgas lgajs,gjsag sdfgdf gdfgsdf gdf gsdf gsdf gsdfg sdf gsdfg sdfg </p>
+          <div class="panel panel-body"><h4><%= link_to "#{comment.name}", comment.url %></h4>
+            <p><%= comment.response %></p>
+            <p>» Posted: <em><%= time_ago_in_words(comment.created_at) %> ago on <%= comment.created_at.strftime('%B %d, %Y') %></em></p>
           </div>
         </div>
-      </div>
-    <%# end %>
-    <br><br>
+      <% end %>
+    </div><br><br>
   <% end %>
 <% end %>

@@ -1,0 +1,25 @@
+<%= content_for(:title, "Tags | VincentRotter") %>
+
+<div class="well">
+  <h1 class="new_post">New Tag</h1>
+  <div class="hidden_form">
+    <%= render 'layouts/errors', object: @tag %><br>
+    <%= form_for @tag do |f| %>
+      <%= f.text_field :name, placeholder: "Name of new tag", class: "form-control" %><br>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <% @tags.order(name: :asc).each do |tag| %>
+      <h1><%= tag.name %> <em class="text-success">used <%= pluralize(tag.wikis.size, "time") %></em>
+        <%= link_to "Delete", tag_path(tag), method: "delete", data: {confirm: 'Delete tag?'}, class: "btn btn-danger pull-right" %>
+      </h1>
+      <% end %>
+    </div>
+  </div>
+</div>
+

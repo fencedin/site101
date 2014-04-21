@@ -8,6 +8,8 @@ class WikisController < ApplicationController
       end
     end
     @wiki = Wiki.new
+    @tag = Tag.new
+    @tags = Tag.all
   end
   def create
     @wiki = Wiki.new(wiki_params)
@@ -20,6 +22,7 @@ class WikisController < ApplicationController
     end
   end
   def update
+    params[:wiki][:tags_ids] ||= []
     @wiki = Wiki.find(params[:id])
     if @wiki.update(wiki_params)
     redirect_to wikis_path
@@ -29,6 +32,7 @@ class WikisController < ApplicationController
   end
   def show
     @wiki = Wiki.find(params[:id])
+    @comment = Comment.new
   end
   def destroy
     @wiki = Wiki.find(params[:id])
@@ -38,6 +42,6 @@ class WikisController < ApplicationController
 
 private
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :hidden)
+    params.require(:wiki).permit(:title, :body, :hidden, {tag_ids: []})
   end
 end
