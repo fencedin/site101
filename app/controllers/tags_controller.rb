@@ -13,8 +13,6 @@ class TagsController < ApplicationController
       render "index"
     end
   end
-  def update
-  end
   def destroy
     @tag = Tag.find(params[:id])
     @tag.destroy
