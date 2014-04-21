@@ -29,9 +29,6 @@
         <% if admin_signed_in? %>
           <li><%= link_to "Logout", destroy_admin_session_path, method: "delete"%></li>
         <% end %>
-        <% if !admin_signed_in? %>
-          <li><%= link_to "Signin", new_admin_session_path %></li>
-        <% end %>
 
         <li><a class="icon" href="https://github.com/fencedin"><img src="/images/GitHub.png" alt="GitHub:fencedin" width="32px" height="32px"></a></li>
         <li><a class="icon" href="https://coderbits.com/fencedin"><img src="/images/coderbits.png" alt="coderbits:fencedin"  width="30px" height="30px" class=""></a></li>
