@@ -18,8 +18,8 @@
 
       <ul class="nav navbar-nav">
         <li><%= link_to "Blog", wikis_path %></li>
-        <li><a href="/">Current Projects</a></li>
-        <li><a href="/">Leave Feedback</a></li>
+        <!-- <li><a href="/">Current Projects **not working**</a></li> -->
+        <!-- <li><a href="/">Leave Feedback **not working**</a></li> -->
         <% if admin_signed_in? %>
           <li><%= link_to "Tags", tags_path %></li>
         <% end %>
@@ -37,14 +37,14 @@
       </ul>
 
       <% if current_page?(wikis_path) %>
-        <div class="col-lg-2 search navbar-right">
+        <!-- <div class="col-lg-2 search navbar-right">
           <form class="navbar-form input-group" role="search">
             <input type="text" class="form-control" placeholder="Search **not working**">
             <span class="input-group-btn">
               <button class="btn btn-default" type="submit">Submit</button>
             </span>
           </form>
-        </div>
+        </div> -->
       <% end %>
 
     </div>
