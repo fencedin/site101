@@ -2,6 +2,16 @@
 
 <% if admin_signed_in? %>
   <%= render 'form' %>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well jumbotron">
+        <p>
+           Enjoy some random ramblings about stuff.
+        </p>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <% if admin_signed_in? %>
